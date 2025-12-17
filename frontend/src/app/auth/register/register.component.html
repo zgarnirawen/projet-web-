@@ -1,0 +1,73 @@
+<div class="auth-page">
+  <div class="auth-container">
+    <div class="auth-header">
+      <h2>Créer un compte</h2>
+      <p>Rejoignez-nous dès aujourd'hui</p>
+    </div>
+
+    <div class="auth-body">
+      <div *ngIf="error" class="error">{{ error }}</div>
+
+      <!-- Google Button -->
+      <div class="google-button-container">
+        <div id="googleRegisterButton"></div>
+      </div>
+
+      <div class="divider">
+        <span>OU</span>
+      </div>
+
+      <form (ngSubmit)="register()">
+        <div class="form-group">
+          <label for="name">Nom complet</label>
+          <input
+            id="name"
+            type="text"
+            placeholder="Jean Dupont"
+            [(ngModel)]="name"
+            name="name"
+            [disabled]="loading"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Adresse email</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="exemple@email.com"
+            [(ngModel)]="email"
+            name="email"
+            [disabled]="loading"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="••••••••"
+            [(ngModel)]="password"
+            name="password"
+            [disabled]="loading"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn-primary" [disabled]="loading">
+          {{ loading ? 'Inscription...' : 'S\'inscrire' }}
+        </button>
+      </form>
+    </div>
+
+    <div class="auth-footer">
+      <p>
+        Vous avez déjà un compte ?
+        <a routerLink="/login">Se connecter</a>
+      </p>
+    </div>
+  </div>
+</div>

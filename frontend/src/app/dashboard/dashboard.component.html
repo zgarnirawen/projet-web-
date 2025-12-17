@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>📊 Dashboard</h1>
+
+  <div *ngIf="loading" class="loading">
+    <p>Chargement des statistiques...</p>
+  </div>
+
+  <div *ngIf="!loading" class="stats-wrapper">
+    <div class="cards">
+      <div class="card">
+        <h3>📦 Articles</h3>
+        <p class="stat-number">{{ statistiques.totalArticles }}</p>
+      </div>
+      <div class="card">
+        <h3>📋 Commandes</h3>
+        <p class="stat-number">{{ statistiques.totalCommandes }}</p>
+      </div>
+      <div class="card">
+        <h3>💰 Chiffre d'affaires</h3>
+        <p class="stat-number">{{ statistiques.chiffreAffaires | number:'1.2-2' }}</p>
+      </div>
+      <div class="card">
+        <h3>💎 Valeur du stock</h3>
+        <p class="stat-number">{{ statistiques.valeurStock | number:'1.2-2' }}</p>
+      </div>
+    </div>
+  </div>
+</div>

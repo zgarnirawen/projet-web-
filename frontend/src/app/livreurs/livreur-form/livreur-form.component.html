@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="form-card">
+    <h1>{{ isEditMode ? 'Modifier le Livreur' : 'Ajouter un Livreur' }}</h1>
+
+    <div *ngIf="loading" class="loading">
+      Chargement...
+    </div>
+
+    <div *ngIf="error" class="error">
+      {{ error }}
+    </div>
+
+    <form *ngIf="!loading" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nom">Nom *</label>
+          <input
+            type="text"
+            id="nom"
+            [(ngModel)]="livreur.nom"
+            name="nom"
+            required
+            placeholder="Entrez le nom"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="prenom">Prénom *</label>
+          <input
+            type="text"
+            id="prenom"
+            [(ngModel)]="livreur.prenom"
+            name="prenom"
+            required
+            placeholder="Entrez le prénom"
+          />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="telephone">Téléphone *</label>
+          <input
+            type="tel"
+            id="telephone"
+            [(ngModel)]="livreur.telephone"
+            name="telephone"
+            required
+            placeholder="Ex: +33 6 12 34 56 78"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="ville">Ville *</label>
+          <input
+            type="text"
+            id="ville"
+            [(ngModel)]="livreur.ville"
+            name="ville"
+            required
+            placeholder="Entrez la ville"
+          />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="matriculeVehicule">Matricule Véhicule *</label>
+          <input
+            type="text"
+            id="matriculeVehicule"
+            [(ngModel)]="livreur.matriculeVehicule"
+            name="matriculeVehicule"
+            required
+            placeholder="Ex: AB-123-CD"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="livreur.disponible"
+              name="disponible"
+            />
+            <span>Disponible</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" (click)="cancel()">
+          Annuler
+        </button>
+        <button type="submit" class="btn-submit" [disabled]="loading">
+          {{ isEditMode ? 'Modifier' : 'Créer' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

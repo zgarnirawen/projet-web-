@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="header">
+    <h2>📋 Gestion des Commandes</h2>
+    <button class="btn-add" routerLink="/commandes/nouveau">
+      ➕ Nouvelle commande
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Chargement des commandes...</p>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    <div>
+      <strong>{{ error }}</strong>
+    </div>
+    <button (click)="chargerCommandes()" class="retry-btn">🔄 Réessayer</button>
+  </div>
+
+  <div *ngIf="!loading && !error && commandes.length === 0" class="empty-state">
+    <div class="empty-icon">📭</div>
+    <p>Aucune commande trouvée</p>
+    <button class="btn-primary" routerLink="/commandes/nouveau">Créer la première commande</button>
+  </div>
+
+  <div class="table-container" *ngIf="!loading && !error && commandes.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th class="text-left">N° Commande</th>
+          <th class="text-left">Client ID</th>
+          <th class="text-left">Articles</th>
+          <th class="text-right">Montant Total</th>
+          <th class="text-left">Date</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of commandes">
+          <td class="numero text-left">CMD-{{ c.id }}</td>
+          <td class="client text-left">Client {{ c.idClient }}</td>
+          <td class="articles-list text-left">
+            <div *ngFor="let ligne of c.lignes" class="article-item">
+              {{ ligne.article }} (x{{ ligne.quantite }})
+            </div>
+          </td>
+          <td class="montant text-right">{{ calculateTotal(c) | number:'1.2-2' }}</td>
+          <td class="text-left">{{ c.createdAt | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td class="actions text-center">
+            <button class="btn-edit" [routerLink]="['/commandes/modifier', c._id]" title="Modifier">
+              ✏️
+            </button>
+            <button class="btn-delete" (click)="delete(c._id)" title="Supprimer">
+              🗑️
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

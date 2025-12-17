@@ -1,0 +1,13 @@
+{
+  "name": "erp-projet",
+  "version": "1.0.0",
+  "description": "ERP Full Stack Application",
+  "scripts": {
+    "start": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "backend": "cd backend && npm start",
+    "frontend": "cd frontend && ng serve --open"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

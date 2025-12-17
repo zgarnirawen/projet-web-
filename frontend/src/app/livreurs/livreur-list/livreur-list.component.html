@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="header">
+    <h2>🚚 Gestion des Livreurs</h2>
+    <button class="btn-add" (click)="addLivreur()">
+      ➕ Ajouter un Livreur
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    <p>Chargement des livreurs...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && !error && livreurs.length === 0" class="empty-state">
+    <div class="empty-icon">📭</div>
+    <p>Aucun livreur trouvé</p>
+    <button class="btn-primary" (click)="addLivreur()">Créer le premier livreur</button>
+  </div>
+
+  <table *ngIf="!loading && !error && livreurs.length > 0">
+    <thead>
+      <tr>
+        <th class="text-left">Nom</th>
+        <th class="text-left">Prénom</th>
+        <th class="text-left">Téléphone</th>
+        <th class="text-left">Ville</th>
+        <th class="text-center">Disponible</th>
+        <th class="text-left">Matricule Véhicule</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let livreur of livreurs">
+        <td class="nom text-left">{{ livreur.nom }}</td>
+        <td class="text-left">{{ livreur.prenom }}</td>
+        <td class="telephone text-left">{{ livreur.telephone }}</td>
+        <td class="text-left">{{ livreur.ville }}</td>
+        <td class="center text-center">
+          <span [class]="livreur.disponible ? 'badge-success' : 'badge-danger'">
+            {{ livreur.disponible ? 'Disponible' : 'Indisponible' }}
+          </span>
+        </td>
+        <td class="matricule text-left">{{ livreur.matriculeVehicule }}</td>
+        <td class="actions text-center">
+          <button class="btn-edit" (click)="editLivreur(livreur._id)" title="Modifier">
+            ✏️
+          </button>
+          <button class="btn-delete" (click)="deleteLivreur(livreur._id)" title="Supprimer">
+            🗑️
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
